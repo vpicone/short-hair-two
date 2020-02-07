@@ -1,0 +1,16 @@
+.wrapper {
+  transition: transform 1s ease-in-out;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.squareContainer {
+  height: 100%;
+  width: var(--booking-bar-width);
+}
+
+.hidden {
+  transform: translateX(var(--booking-bar-width));
+}
