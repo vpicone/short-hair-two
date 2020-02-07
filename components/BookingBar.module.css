@@ -1,6 +1,7 @@
 .wrapper {
-  transition: transform 1s ease-in-out;
+  transition: transform 0.4s ease;
   height: 100%;
+  width: 500px;
   position: fixed;
   right: 0;
   top: 0;
@@ -8,9 +9,20 @@
 
 .squareContainer {
   height: 100%;
-  width: var(--booking-bar-width);
+  width: 100%;
+  border: none;
 }
 
 .hidden {
-  transform: translateX(var(--booking-bar-width));
+  transform: translateX(500px);
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    width: 80vw;
+  }
+
+  .hidden {
+    transform: translateX(80vw);
+  }
 }

@@ -1,4 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  useCallback
+} from "react";
+
+import useOnClickOutside from "../hooks/useOnClickOutside";
 import styles from "./BookingBar.module.css";
 import cx from "classnames";
 
@@ -16,16 +24,23 @@ export const BookingBarContextProvider = ({ children }) => {
 export const useBookingBar = () => useContext(BookingBarContext);
 
 const BookingBar = () => {
-  const { hidden } = useBookingBar();
+  const wrapperRef = useRef();
+  const { hidden, setHidden } = useBookingBar();
+  const handler = useCallback(() => {
+    if (!hidden) {
+      setHidden(true);
+    }
+  }, [hidden]);
+
+  useOnClickOutside(wrapperRef, handler);
+
   const className = cx(styles.wrapper, { [styles.hidden]: hidden });
 
   return (
-    <div aria-hidden={hidden} className={className}>
-      <div
+    <div ref={wrapperRef} aria-hidden={hidden} className={className}>
+      <iframe
         className={styles.squareContainer}
-        dangerouslySetInnerHTML={{
-          __html: `<script async="true" src="https://square.site/appointments/buyer/widget/12if2srm1q33bv/22BVQ3WPQER8X.js"></script>`
-        }}
+        src="https://squareup.com/appointments/buyer/widget/12if2srm1q33bv/22BVQ3WPQER8X"
       />
     </div>
   );

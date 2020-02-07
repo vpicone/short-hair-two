@@ -1,6 +1,9 @@
 import { useBookingBar } from "./BookingBar";
 export default () => {
-  const { hidden, setHidden } = useBookingBar();
-  console.log(hidden, setHidden);
-  return <button onClick={() => setHidden(!hidden)}>Launch</button>;
+  const { setHidden } = useBookingBar();
+  return (
+    <button type="button" onClick={() => setHidden(false)}>
+      Launch
+    </button>
+  );
 };
